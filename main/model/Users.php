@@ -60,15 +60,15 @@ class Users
             if (strlen($value) == 0) {
                 $nullFlaf = true;
             } elseif (strlen($value) < 2) {
-                $this->errorsValidate[] = 'поле "' . $key . '" не должно быть короче двух символов';
+           
             } elseif (strlen($value) > 50) {
-                $this->errorsValidate[] = 'поле "' . $key . '" не должно быть длинее 50 символов';
+      
             }
             $newParam[$key] = $value;
         }
 
         if ($nullFlaf) {
-            $this->errorsValidate[] = 'пожалуйста, заполните все поля';
+     
         }
         return $newParam;
     }
@@ -83,7 +83,6 @@ class Users
     public function validateEmale($email)
     {
         if (preg_match('/.+@.+\..+/i', $email) == 0) {
-            $this->errorsValidate[] = '"' . $email . '" не соответствует формату email';
             return false;
         }
         return true;
@@ -95,7 +94,6 @@ class Users
     public function validatePassword($password, $confirm_password)
     {
         if ($password !== $confirm_password) {
-            $this->errorsValidate[] = 'пароль и подтверждение не совпадают';
             return false;
         }
         return true;
@@ -134,7 +132,6 @@ class Users
     {
         $user = $this->searchByLogin($login);
         if ($user !== false) {
-            $this->errorsValidate[] = 'пользователь с логином "' . $login . '"" уже есть';
             return false;
         }
         return true;
@@ -176,7 +173,6 @@ class Users
     {
         $user = $this->searchByEmail($email);
         if ($user !== false) {
-            $this->errorsValidate[] = 'пользователь с таким email уже есть';
             return false;
         }
         return true;
